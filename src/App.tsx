@@ -8,18 +8,14 @@ import CTA from './components/CTA';
 import Footer from './components/Footer';
 
 function App() {
-  const handleBookDemo = () => {
-    window.open('https://api.leadconnectorhq.com/widget/booking/rWKciXJwT10NSuhCjwgu', '_blank');
-  };
-
   return (
     <div className="min-h-screen bg-white">
-      <Header onGetStarted={handleBookDemo} />
-      <Hero onBookDemo={handleBookDemo} />
+      <Header />
+      <Hero />
       <Features />
       <HowItWorks />
-      <Benefits onBookDemo={handleBookDemo} />
-      <CTA onBookDemo={handleBookDemo} />
+      <Benefits />
+      <CTA />
       <Footer />
     </div>
   );

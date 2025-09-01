@@ -48,3 +48,6 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
     </div>
   );
 };
+
+
+export default BookingForm

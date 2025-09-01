@@ -15,7 +15,7 @@ const Header: React.FC<HeaderProps> = ({ onGetStarted }) => {
           {/* Logo */}
           <div className="flex items-center">
             <img 
-              src="/Loanpros Logo WHITE BACKGROND SNIPPED.png" 
+              src="/LoanprosWhitebackgroundbluetextSNIPPED.png" 
               alt="LoanPros" 
               className="h-14 w-auto"
             />

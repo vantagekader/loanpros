@@ -32,14 +32,14 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
         <div className="p-6">
           <div className="w-full h-[600px]">
             <iframe 
-              src="https://api.leadconnectorhq.com/widget/booking/rgl0Ou8rF4hlQ0biRqFg"
+              src="https://api.leadconnectorhq.com/widget/group/EhdTujOiZjh5g2GDWEPf"
               style={{
                 width: '100%',
                 height: '600px',
                 border: 'none'
               }}
               scrolling="no" 
-              id="EhdTujOiZjh5g2GDWEPf_1756696904649"
+              id="EhdTujOiZjh5g2GDWEPf_1756697181917"
               allow="camera; microphone; geolocation"
             />
           </div>

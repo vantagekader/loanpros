@@ -1,40 +1,11 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Calendar, Clock, CheckCircle, Star, Phone, Mail, User, Building } from 'lucide-react';
+import { ArrowLeft, CheckCircle, Star, User, Building, Calendar } from 'lucide-react';
 
 interface BookingPageProps {
   onBack: () => void;
 }
 
 const BookingPage: React.FC<BookingPageProps> = ({ onBack }) => {
-  const [selectedDate, setSelectedDate] = useState('');
-  const [selectedTime, setSelectedTime] = useState('');
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    company: '',
-    loanVolume: ''
-  });
-
-  const timeSlots = [
-    '9:00 AM', '10:00 AM', '11:00 AM', '1:00 PM', 
-    '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM'
-  ];
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission
-    alert('Demo booked successfully! We\'ll send you a confirmation email shortly.');
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
       {/* Header */}
@@ -133,163 +104,25 @@ const BookingPage: React.FC<BookingPageProps> = ({ onBack }) => {
           </div>
 
           {/* Right Column - Booking Form */}
-          <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
-            <div className="space-y-6">
-              <div className="text-center space-y-2">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
-                  <Calendar className="w-8 h-8 text-blue-600" />
-                </div>
-                <h2 className="text-2xl font-bold text-gray-900">Book Your Demo</h2>
-                <p className="text-gray-600">Schedule a personalized demo and see LoanPros in action</p>
+          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+            <div className="text-center p-8 space-y-2 bg-gradient-to-r from-blue-50 to-indigo-50">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
+                <Calendar className="w-8 h-8 text-blue-600" />
               </div>
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Personal Information */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      First Name *
-                    </label>
-                    <input
-                      type="text"
-                      name="firstName"
-                      required
-                      value={formData.firstName}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                      placeholder="John"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Last Name *
-                    </label>
-                    <input
-                      type="text"
-                      name="lastName"
-                      required
-                      value={formData.lastName}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                      placeholder="Smith"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                    placeholder="john@example.com"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Phone Number *
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    required
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                    placeholder="(555) 123-4567"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Company/Brokerage
-                  </label>
-                  <input
-                    type="text"
-                    name="company"
-                    value={formData.company}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                    placeholder="ABC Mortgage"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Monthly Loan Volume
-                  </label>
-                  <select
-                    name="loanVolume"
-                    value={formData.loanVolume}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                  >
-                    <option value="">Select volume</option>
-                    <option value="0-5">0-5 loans/month</option>
-                    <option value="6-15">6-15 loans/month</option>
-                    <option value="16-30">16-30 loans/month</option>
-                    <option value="30+">30+ loans/month</option>
-                  </select>
-                </div>
-
-                {/* Date Selection */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Preferred Date *
-                  </label>
-                  <input
-                    type="date"
-                    required
-                    value={selectedDate}
-                    onChange={(e) => setSelectedDate(e.target.value)}
-                    min={new Date().toISOString().split('T')[0]}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                  />
-                </div>
-
-                {/* Time Selection */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Preferred Time *
-                  </label>
-                  <div className="grid grid-cols-2 gap-2">
-                    {timeSlots.map((time) => (
-                      <button
-                        key={time}
-                        type="button"
-                        onClick={() => setSelectedTime(time)}
-                        className={`p-3 rounded-lg border transition-all ${
-                          selectedTime === time
-                            ? 'bg-blue-600 text-white border-blue-600'
-                            : 'bg-white text-gray-700 border-gray-300 hover:border-blue-300 hover:bg-blue-50'
-                        }`}
-                      >
-                        <Clock className="w-4 h-4 inline mr-2" />
-                        {time}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={!selectedDate || !selectedTime}
-                  className="w-full bg-blue-600 text-white px-8 py-4 rounded-lg hover:bg-blue-700 transition-all duration-300 font-semibold text-lg flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-1"
-                >
-                  <Calendar className="w-5 h-5" />
-                  Book My Demo
-                </button>
-
-                <p className="text-xs text-gray-500 text-center">
-                  By booking a demo, you agree to receive follow-up communications from LoanPros.
-                </p>
-              </form>
+              <h2 className="text-2xl font-bold text-gray-900">Book Your Demo</h2>
+              <p className="text-gray-600">Schedule a personalized demo and see LoanPros in action</p>
+            </div>
+            
+            {/* Calendly Embed */}
+            <div className="h-[600px]">
+              <iframe
+                src="https://calendly.com/your-calendly-link/15min"
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                title="Schedule a Demo"
+                className="rounded-b-2xl"
+              ></iframe>
             </div>
           </div>
         </div>

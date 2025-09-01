@@ -1,48 +1,11 @@
 import React, { useState } from 'react';
-import { ArrowLeft, CheckCircle, Star, User, Building, Calendar, Clock } from 'lucide-react';
+import { ArrowLeft, CheckCircle, Star, User, Building, Calendar } from 'lucide-react';
 
 interface BookingPageProps {
   onBack: () => void;
 }
 
 const BookingPage: React.FC<BookingPageProps> = ({ onBack }) => {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    company: '',
-    loanVolume: '',
-    preferredDate: '',
-    preferredTime: ''
-  });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleTimeSelect = (time: string) => {
-    setFormData({
-      ...formData,
-      preferredTime: time
-    });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: Replace with Go High Level calendar booking logic
-    console.log('Form submitted:', formData);
-    alert('Demo booking functionality will be connected to Go High Level calendar');
-  };
-
-  const timeSlots = [
-    '9:00 AM', '10:00 AM', '11:00 AM', '1:00 PM',
-    '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM'
-  ];
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
       {/* Header */}
@@ -177,149 +140,16 @@ const BookingPage: React.FC<BookingPageProps> = ({ onBack }) => {
             */}
             
             <div className="p-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      First Name *
-                    </label>
-                    <input
-                      type="text"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="John"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Last Name *
-                    </label>
-                    <input
-                      type="text"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="Smith"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="john@example.com"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Phone Number *
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="(555) 123-4567"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Company/Brokerage
-                  </label>
-                  <input
-                    type="text"
-                    name="company"
-                    value={formData.company}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="ABC Mortgage"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Monthly Loan Volume
-                  </label>
-                  <select
-                    name="loanVolume"
-                    value={formData.loanVolume}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  >
-                    <option value="">Select volume</option>
-                    <option value="0-5">0-5 loans/month</option>
-                    <option value="6-15">6-15 loans/month</option>
-                    <option value="16-30">16-30 loans/month</option>
-                    <option value="30+">30+ loans/month</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Preferred Date *
-                  </label>
-                  <input
-                    type="date"
-                    name="preferredDate"
-                    value={formData.preferredDate}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Preferred Time *
-                  </label>
-                  <div className="grid grid-cols-2 gap-3">
-                    {timeSlots.map((time) => (
-                      <button
-                        key={time}
-                        type="button"
-                        onClick={() => handleTimeSelect(time)}
-                        className={`p-3 rounded-lg border transition-all duration-200 flex items-center justify-center gap-2 ${
-                          formData.preferredTime === time
-                            ? 'bg-blue-600 text-white border-blue-600'
-                            : 'bg-white text-gray-700 border-gray-300 hover:border-blue-300 hover:bg-blue-50'
-                        }`}
-                      >
-                        <Clock className="w-4 h-4" />
-                        {time}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-blue-600 text-white py-4 rounded-lg hover:bg-blue-700 transition-colors font-semibold text-lg flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
-                >
-                  <Calendar className="w-5 h-5" />
-                  Book My Demo
-                </button>
-
-                <p className="text-xs text-gray-500 text-center">
-                  By booking a demo, you agree to receive follow-up communications from LoanPros.
-                </p>
-              </form>
+              {/* Go High Level Calendar Embed */}
+              <div className="min-h-[600px]">
+                <iframe 
+                  src="https://api.leadconnectorhq.com/widget/booking/rWKciXJwT10NSuhCjwgu" 
+                  style={{width: '100%', border: 'none', overflow: 'hidden', minHeight: '600px'}} 
+                  scrolling="no" 
+                  id="EhdTujOiZjh5g2GDWEPf_1756688231187"
+                  title="Book Your Demo"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -355,6 +185,9 @@ const BookingPage: React.FC<BookingPageProps> = ({ onBack }) => {
           </div>
         </div>
       </div>
+      
+      {/* GHL Form Embed Script */}
+      <script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
     </div>
   );
 };

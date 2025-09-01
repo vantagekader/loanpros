@@ -6,29 +6,20 @@ import HowItWorks from './components/HowItWorks';
 import Benefits from './components/Benefits';
 import CTA from './components/CTA';
 import Footer from './components/Footer';
-import BookingPage from './components/BookingPage';
 
 function App() {
-  const [showBooking, setShowBooking] = useState(false);
-
-  const handleShowBooking = () => {
-    setShowBooking(true);
-    // Scroll to top when opening booking page
-    window.scrollTo(0, 0);
+  const handleBookDemo = () => {
+    window.open('https://api.leadconnectorhq.com/widget/booking/rWKciXJwT10NSuhCjwgu', '_blank');
   };
-
-  if (showBooking) {
-    return <BookingPage onBack={() => setShowBooking(false)} />;
-  }
 
   return (
     <div className="min-h-screen bg-white">
-      <Header onGetStarted={handleShowBooking} />
-      <Hero onBookDemo={handleShowBooking} />
+      <Header onGetStarted={handleBookDemo} />
+      <Hero onBookDemo={handleBookDemo} />
       <Features />
       <HowItWorks />
-      <Benefits onBookDemo={handleShowBooking} />
-      <CTA onBookDemo={handleShowBooking} />
+      <Benefits onBookDemo={handleBookDemo} />
+      <CTA onBookDemo={handleBookDemo} />
       <Footer />
     </div>
   );

@@ -144,7 +144,9 @@ const BookingPage: React.FC<BookingPageProps> = ({ onBack }) => {
               <div className="min-h-[600px]">
                 <iframe 
                   src="https://api.leadconnectorhq.com/widget/booking/rWKciXJwT10NSuhCjwgu" 
-                  style={{width: '100%', border: 'none', overflow: 'hidden', minHeight: '600px'}} 
+                  style={{width: '100%', border: 'none', overflow: 'hidden', minHeight: '600px'}}
+                  allow="camera; microphone; geolocation"
+                  sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
                   scrolling="no" 
                   id="EhdTujOiZjh5g2GDWEPf_1756688231187"
                   title="Book Your Demo"

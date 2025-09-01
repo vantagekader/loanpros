@@ -17,7 +17,7 @@ const Header: React.FC<HeaderProps> = ({ onGetStarted }) => {
             <img 
               src="/LoanprosWhitebackgroundbluetextSNIPPED.png" 
               alt="LoanPros" 
-              className="h-14 w-auto"
+             className="h-16 w-auto"
             />
           </div>
 

@@ -32,15 +32,15 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
         <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
           <div className="w-full h-[600px]">
             <iframe 
-              src="https://api.leadconnectorhq.com/widget/group/EhdTujOiZjh5g2GDWEPf"
+              src="https://api.leadconnectorhq.com/widget/booking/LYZPc4q07HBvvWceHYuK" 
               style={{
                 width: '100%',
-                height: '600px',
-                border: 'none'
-              }}
+                border: 'none',
+                overflow: 'hidden',
+                height: '600px'
+              }} 
               scrolling="no" 
-              id="EhdTujOiZjh5g2GDWEPf_1756697181917"
-              allow="camera; microphone; geolocation"
+              id="LYZPc4q07HBvvWceHYuK_1757125670069"
             />
           </div>
         </div>

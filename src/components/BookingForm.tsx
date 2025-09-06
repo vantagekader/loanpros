@@ -6,11 +6,8 @@ interface BookingFormProps {
   onClose: () => void;
 }
 
-const BOOKING_SRC =
-  "https://api.leadconnectorhq.com/widget/booking/LYZPc4q07HBvvWceHYuK";
-
 const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
-  const [iframeKey, setIframeKey] = useState(0);
+  const [contentKey, setContentKey] = useState(0);
 
   // Listen for booking completion messages
   useEffect(() => {
@@ -38,7 +35,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
   // Reset calendar whenever modal opens
   useEffect(() => {
     if (isOpen) {
-      setIframeKey((k) => k + 1);
+      setContentKey((k) => k + 1);
     }
   }, [isOpen]);
 
@@ -71,13 +68,15 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
           <div className="flex-1 overflow-y-auto min-h-0">
             <div className="p-6 h-full">
               <div className="h-full rounded-xl overflow-hidden">
-                <iframe
-                  key={iframeKey} // ensures fresh load each open
-                  src={BOOKING_SRC}
-                  className="w-full h-full block"
-                  style={{ border: "none" }}
-                  title="Booking Calendar"
-                />
+                <div key={contentKey} className="w-full h-full">
+                  <iframe 
+                    src="https://api.leadconnectorhq.com/widget/booking/LYZPc4q07HBvvWceHYuK" 
+                    style={{ width: '100%', border: 'none', overflow: 'hidden', height: '100%' }} 
+                    scrolling="no" 
+                    id="LYZPc4q07HBvvWceHYuK_1757132094074"
+                    title="Booking Calendar"
+                  />
+                </div>
               </div>
             </div>
           </div>

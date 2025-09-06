@@ -36,11 +36,11 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
               style={{
                 width: '100%',
                 border: 'none',
-                overflow: 'hidden',
+                overflow: 'auto',
                 minHeight: '600px',
                 height: 'auto'
               }} 
-              scrolling="no" 
+              scrolling="yes" 
               id="intro-cal-176414mzciy1-4ede1f05-875c-4570-808d-7680b618905d"
             />
           </div>

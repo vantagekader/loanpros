@@ -10,39 +10,39 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] flex flex-col">
-        {/* Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6 rounded-t-2xl">
-          <div className="flex justify-between items-center">
-            <div>
-              <h2 className="text-2xl font-bold">Book Your Demo</h2>
-              <p className="text-blue-100 mt-1">Schedule a time that works for you</p>
+    // Allow the overlay itself to scroll on very small screens
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 p-4 overflow-y-auto">
+      <div className="mx-auto max-w-4xl">
+        <div className="bg-white rounded-2xl shadow-2xl w-full h-[90vh] flex flex-col min-h-0">
+          {/* Header */}
+          <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6 rounded-t-2xl">
+            <div className="flex justify-between items-center">
+              <div>
+                <h2 className="text-2xl font-bold">Book Your Demo</h2>
+                <p className="text-blue-100 mt-1">Schedule a time that works for you</p>
+              </div>
+              <button
+                onClick={onClose}
+                className="text-white hover:text-gray-200 transition-colors p-2"
+                aria-label="Close booking form"
+              >
+                <X className="w-6 h-6" />
+              </button>
             </div>
-            <button
-              onClick={onClose}
-              className="text-white hover:text-gray-200 transition-colors p-2"
-            >
-              <X className="w-6 h-6" />
-            </button>
           </div>
-        </div>
 
-        {/* GHL Calendar Embed */}
-        <div className="flex-1 overflow-y-auto">
-          <div className="p-6">
-            <iframe 
-              src="https://api.leadconnectorhq.com/widget/booking/LYZPc4q07HBvvWceHYuK" 
-              style={{
-                width: '100%',
-                border: 'none',
-                overflow: 'auto',
-                minHeight: '600px',
-                height: 'auto'
-              }} 
-              scrolling="yes" 
-              id="intro-cal-176414mzciy1-4ede1f05-875c-4570-808d-7680b618905d"
-            />
+          {/* Scrollable body */}
+          <div className="flex-1 overflow-y-auto min-h-0">
+            <div className="p-6 h-full">
+              <div className="h-full rounded-xl overflow-hidden">
+                <iframe
+                  src="https://api.leadconnectorhq.com/widget/booking/LYZPc4q07HBvvWceHYuK"
+                  className="w-full h-full block"
+                  style={{ border: 'none' }}
+                  title="Booking Calendar"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -50,5 +50,4 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
   );
 };
 
-
-export default BookingForm
+export default BookingForm;

@@ -247,7 +247,8 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
  <p className="text-blue-100 mt-1">Schedule a time that works for you</p>
  </div>
  <div className="flex items-center gap-2">
- {/* Debug button - remove in production */}
+ {/* Remove debug button - auto-close after 30 seconds */}
+ {/*
  <button
  onClick={triggerCompletion}
  className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm transition-colors opacity-50"
@@ -255,6 +256,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
  >
  Test
  </button>
+ */}
  <button
  onClick={handleManualClose}
  className="text-white hover:text-gray-200 transition-colors p-2"

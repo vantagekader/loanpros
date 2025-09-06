@@ -14,11 +14,13 @@ const Header: React.FC<HeaderProps> = ({ onGetStarted }) => {
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <div className="flex items-center">
-            <img 
-              src="/LoanprosWhitebackgroundbluetextSNIPPED.png" 
-              alt="LoanPros" 
-             className="h-16 w-auto"
-            />
+            <a href="/" className="flex items-center">
+              <img 
+                src="/LoanprosWhitebackgroundbluetextSNIPPED.png" 
+                alt="LoanPros" 
+                className="h-16 w-auto"
+              />
+            </a>
           </div>
 
           {/* Desktop Navigation */}

@@ -196,10 +196,10 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
  const handleIframeLoad = () => {
  console.log('Iframe loaded');
  setIframeLoaded(true);
+ const iframe = iframeRef.current;
 
  // Set initial URL reference
  try {
- const iframe = iframeRef.current;
  if (iframe && iframe.contentWindow && iframe.contentWindow.location) {
  lastUrlRef.current = iframe.contentWindow.location.href;
  }

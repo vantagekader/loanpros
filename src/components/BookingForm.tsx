@@ -338,10 +338,9 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
 
  <button
  onClick={cancelAutoClose}
-  const iframe = iframeRef.current;
-
  className="px-6 py-3 text-gray-600 hover:text-gray-800 transition-colors rounded-xl border border-gray-300 hover:border-gray-400"
  >
+ Cancel
  </button>
  </div>
  </div>

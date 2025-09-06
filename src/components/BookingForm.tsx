@@ -196,10 +196,10 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
  const handleIframeLoad = () => {
  console.log('Iframe loaded');
  setIframeLoaded(true);
- const iframe = iframeRef.current;
 
  // Set initial URL reference
  try {
+ const iframe = iframeRef.current;
  if (iframe && iframe.contentWindow && iframe.contentWindow.location) {
  lastUrlRef.current = iframe.contentWindow.location.href;
  }
@@ -274,7 +274,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
  <div key={contentKey} className="w-full h-full">
  <iframe
  ref={iframeRef}
- src="https://api.leadconnectorhq.com/widget/booking/LYZPc4q07HBvvWceHYuK"
+ src={`https://api.leadconnectorhq.com/widget/booking/LYZPc4q07HBvvWceHYuK?t=${contentKey}`}
  className="w-full h-full block"
  style={{
  border: "none",
@@ -282,7 +282,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
  height: "100%"
  }}
  title="Booking Calendar"
- id="LYZPc4q07HBvvWceHYuK_1757132084887"
+ id={`LYZPc4q07HBvvWceHYuK_${contentKey}`}
  onLoad={handleIframeLoad}
  allow="fullscreen"
  />

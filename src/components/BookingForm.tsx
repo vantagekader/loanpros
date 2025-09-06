@@ -15,7 +15,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
   const [iframeKey, setIframeKey] = useState(0);
   const [showToast, setShowToast] = useState(false);
 
-  // Reset whenever modal opens
+  // Reset calendar whenever modal opens
   useEffect(() => {
     if (isOpen) {
       setIframeKey((k) => k + 1);
@@ -23,22 +23,26 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
     }
   }, [isOpen]);
 
-  const handleMessage = useCallback((event: MessageEvent) => {
-    // Only trust messages / navigations from LoanPros
-    if (typeof event?.data === "string" && event.data.includes("#how-it-works")) {
-      setShowToast(true);
-      setIframeKey((k) => k + 1); // reset to fresh calendar
+  const handleIframeLoad = useCallback((e: React.SyntheticEvent<HTMLIFrameElement>) => {
+    try {
+      const iframe = e.currentTarget as HTMLIFrameElement;
+      const url = iframe.contentWindow?.location.href;
 
-      // auto-hide toast after 4s
-      const t = setTimeout(() => setShowToast(false), 4000);
-      return () => clearTimeout(t);
+      if (url && url.startsWith(REDIRECT_URL)) {
+        // Show toast
+        setShowToast(true);
+
+        // Auto-close + full-page redirect after short delay
+        setTimeout(() => {
+          setShowToast(false);
+          onClose();
+          window.location.href = REDIRECT_URL;
+        }, 1500); // 1.5s delay for user feedback
+      }
+    } catch {
+      // cross-origin protection can block href read → no harm, GHL handles thank-you
     }
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
-  }, [handleMessage]);
+  }, [onClose]);
 
   if (!isOpen) return null;
 
@@ -75,6 +79,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
                   className="w-full h-full block"
                   style={{ border: "none" }}
                   title="Booking Calendar"
+                  onLoad={handleIframeLoad}
                 />
               </div>
             </div>
@@ -90,9 +95,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
               <CheckCircle className="mt-0.5 h-5 w-5 text-green-600" />
               <div className="text-sm">
                 <p className="font-medium text-gray-900">Booking confirmed</p>
-                <p className="text-gray-600">
-                  You’ll receive a calendar invite and reminders.
-                </p>
+                <p className="text-gray-600">Redirecting you now…</p>
               </div>
             </div>
           </div>

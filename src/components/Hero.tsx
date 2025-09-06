@@ -14,8 +14,7 @@ const Hero: React.FC<HeroProps> = ({ onBookDemo }) => {
           <div className="space-y-8">
             <div className="space-y-4">
               <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Stop Chasing
-                <span className="text-blue-600 block">Cold Leads</span>
+                Stop spending money on cold lead lists. You need people that want to talk to you.
               </h1>
               <p className="text-xl text-gray-600 leading-relaxed">
                 Get exclusive, pre-qualified borrower appointments booked directly onto your calendar. 

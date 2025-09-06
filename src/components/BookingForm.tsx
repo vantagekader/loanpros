@@ -9,10 +9,9 @@ interface BookingFormProps {
 const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
   const [contentKey, setContentKey] = useState(0);
 
-  // Listen for booking completion messages
+  // If you're not actually receiving postMessage from GHL, you can remove this whole effect.
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
-      // Check for booking completion signals
       if (
         event.data?.type === "booking-success" ||
         event.data?.type === "booking-complete" ||
@@ -23,20 +22,13 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
       }
     };
 
-    if (isOpen) {
-      window.addEventListener("message", handleMessage);
-    }
-
-    return () => {
-      window.removeEventListener("message", handleMessage);
-    };
+    if (isOpen) window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
   }, [isOpen, onClose]);
 
   // Reset calendar whenever modal opens
   useEffect(() => {
-    if (isOpen) {
-      setContentKey((k) => k + 1);
-    }
+    if (isOpen) setContentKey((k) => k + 1);
   }, [isOpen]);
 
   if (!isOpen) return null;
@@ -50,9 +42,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
             <div className="flex justify-between items-center">
               <div>
                 <h2 className="text-2xl font-bold">Book Your Demo</h2>
-                <p className="text-blue-100 mt-1">
-                  Schedule a time that works for you
-                </p>
+                <p className="text-blue-100 mt-1">Schedule a time that works for you</p>
               </div>
               <button
                 onClick={onClose}
@@ -64,16 +54,15 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
             </div>
           </div>
 
-          {/* Calendar */}
-          <div className="flex-1 overflow-y-auto min-h-0">
+          {/* Scrollable body */}
+          <div className="flex-1 overflow-y-auto min-h-0 [-webkit-overflow-scrolling:touch]">
             <div className="p-6 h-full">
               <div className="h-full rounded-xl overflow-hidden">
                 <div key={contentKey} className="w-full h-full">
-                  <iframe 
-                    src="https://api.leadconnectorhq.com/widget/booking/LYZPc4q07HBvvWceHYuK" 
-                    style={{ width: '100%', border: 'none', overflow: 'hidden', height: '100%' }} 
-                    scrolling="no" 
-                    id="LYZPc4q07HBvvWceHYuK_1757132094074"
+                  <iframe
+                    src="https://api.leadconnectorhq.com/widget/booking/LYZPc4q07HBvvWceHYuK"
+                    className="w-full h-full block"
+                    style={{ border: "none" }}
                     title="Booking Calendar"
                   />
                 </div>

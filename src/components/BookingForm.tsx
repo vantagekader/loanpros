@@ -32,7 +32,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
         <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
           <div className="w-full h-[600px]">
             <iframe 
-              src="https://api.leadconnectorhq.com/widget/booking/LYZPc4q07HBvvWceHYuK" 
+              src="https://api.leadconnectorhq.com/widget/bookings/intro-cal-176414mzciy1-4ede1f05-875c-4570-808d-7680b618905d" 
               style={{
                 width: '100%',
                 border: 'none',
@@ -40,7 +40,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
                 height: '600px'
               }} 
               scrolling="no" 
-              id="LYZPc4q07HBvvWceHYuK_1757125670069"
+              id="intro-cal-176414mzciy1-4ede1f05-875c-4570-808d-7680b618905d"
             />
           </div>
         </div>

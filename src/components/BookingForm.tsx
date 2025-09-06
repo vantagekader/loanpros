@@ -12,6 +12,29 @@ const BOOKING_SRC =
 const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
   const [iframeKey, setIframeKey] = useState(0);
 
+  // Listen for booking completion messages
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      // Check for booking completion signals
+      if (
+        event.data?.type === "booking-success" ||
+        event.data?.type === "booking-complete" ||
+        event.data?.message === "booking-complete" ||
+        (typeof event.data === "string" && event.data.includes("booking"))
+      ) {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      window.addEventListener("message", handleMessage);
+    }
+
+    return () => {
+      window.removeEventListener("message", handleMessage);
+    };
+  }, [isOpen, onClose]);
+
   // Reset calendar whenever modal opens
   useEffect(() => {
     if (isOpen) {

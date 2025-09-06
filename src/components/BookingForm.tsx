@@ -12,6 +12,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
  const [countdown, setCountdown] = useState(5);
  const [showConfirmation, setShowConfirmation] = useState(false);
  const countdownRef = useRef<NodeJS.Timeout | null>(null);
+ const iframeRef = useRef<HTMLIFrameElement | null>(null);
 
  // Handle booking completion and auto-close
  const handleBookingComplete = () => {
@@ -35,23 +36,52 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
  }
  };
 
- // Listen for GHL completion messages
+ // Enhanced message detection for GHL booking completion
  useEffect(() => {
  const handleMessage = (event: MessageEvent) => {
- // Check if message is from GHL domain
- if (event.origin.includes('leadconnectorhq.com') || event.origin.includes('msgsndr.com')) {
- // Listen for completion events
+ // Accept messages from GHL domains and any origin (for testing)
+ const allowedOrigins = [
+ 'leadconnectorhq.com',
+ 'msgsndr.com',
+ 'gohighlevel.com',
+ 'localhost',
+ 'local-credentialless.webcontainer-api.io'
+ ];
+
+ const isAllowedOrigin = allowedOrigins.some(domain =>
+ event.origin.includes(domain) || event.origin.includes('http')
+ );
+
+ if (isAllowedOrigin) {
+ // Handle object messages
  if (event.data && typeof event.data === 'object') {
+ const data = event.data;
+
+ // Check for various completion indicators
  if (
- event.data.type === "booking-success" ||
- event.data.type === "booking-complete" ||
- event.data.type === "booking_completed" ||
- event.data.type === "form_submitted" ||
- event.data.event === "booking_completed" ||
- event.data.event === "form_completed" ||
- (event.data.status && event.data.status === "completed")
+ data.type === "booking-success" ||
+ data.type === "booking-complete" ||
+ data.type === "booking_completed" ||
+ data.type === "appointment_booked" ||
+ data.type === "form_submitted" ||
+ data.type === "calendar_booking_complete" ||
+ data.event === "booking_completed" ||
+ data.event === "appointment_scheduled" ||
+ data.event === "form_completed" ||
+ data.message === "booking_complete" ||
+ data.message === "appointment_confirmed" ||
+ (data.status && (data.status === "completed" || data.status === "success")) ||
+ (data.action && data.action === "booking_complete") ||
+ // Check for nested data
+ (data.data && data.data.status === "completed") ||
+ // Check for success flags
+ data.success === true ||
+ data.booked === true ||
+ data.confirmed === true
  ) {
+ console.log('Booking completion detected via object message:', data);
  handleBookingComplete();
+ return;
  }
  }
 
@@ -59,30 +89,72 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
  if (typeof event.data === "string") {
  const message = event.data.toLowerCase();
  if (
- message.includes("booking-complete") ||
- message.includes("booking") && message.includes("success") ||
- message.includes("appointment") && message.includes("scheduled") ||
- message.includes("form") && message.includes("submit")
+ message.includes("booking") && (message.includes("complete") || message.includes("success") || message.includes("confirmed")) ||
+ message.includes("appointment") && (message.includes("scheduled") || message.includes("booked") || message.includes("confirmed")) ||
+ message.includes("form") && message.includes("submit") && message.includes("success") ||
+ message.includes("calendar") && message.includes("complete") ||
+ message.includes("thank") && message.includes("you") ||
+ message === "booking_complete" ||
+ message === "appointment_confirmed" ||
+ message === "success"
  ) {
+ console.log('Booking completion detected via string message:', message);
+ handleBookingComplete();
+ return;
+ }
+ }
+
+ // Log all messages for debugging
+ console.log('GHL Message received:', event.data);
+ }
+ };
+
+ // Monitor iframe for URL changes (additional detection method)
+ const monitorIframeChanges = () => {
+ try {
+ const iframe = iframeRef.current;
+ if (iframe && iframe.contentWindow) {
+ // Try to access iframe URL (may be blocked by CORS)
+ const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+ if (iframeDoc) {
+ const currentUrl = iframeDoc.URL || window.location.href;
+ if (
+ currentUrl.includes('success') ||
+ currentUrl.includes('complete') ||
+ currentUrl.includes('thank') ||
+ currentUrl.includes('confirmation') ||
+ currentUrl.includes('booked')
+ ) {
+ console.log('Booking completion detected via URL change:', currentUrl);
  handleBookingComplete();
  }
  }
  }
+ } catch (error) {
+ // Expected due to CORS restrictions
+ }
  };
 
  if (isOpen) {
- window.addEventListener("message", handleMessage);
+ window.addEventListener("message", handleMessage, true);
+
+ // Set up periodic monitoring as backup
+ const monitorInterval = setInterval(monitorIframeChanges, 2000);
+
+ return () => {
+ window.removeEventListener("message", handleMessage, true);
+ clearInterval(monitorInterval);
+ };
  }
 
  return () => {
- window.removeEventListener("message", handleMessage);
  if (countdownRef.current) {
  clearInterval(countdownRef.current);
  }
  };
- }, [isOpen, onClose, bookingComplete]);
+ }, [isOpen, bookingComplete]);
 
- // Reset calendar and states whenever modal opens
+ // Reset states when modal opens
  useEffect(() => {
  if (isOpen) {
  setContentKey((k) => k + 1);
@@ -103,7 +175,6 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
  script.type = 'text/javascript';
  script.async = true;
 
- // Check if script already exists
  const existingScript = document.querySelector(`script[src="${script.src}"]`);
  if (!existingScript) {
  document.body.appendChild(script);
@@ -127,35 +198,21 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
  }
  };
 
- // Manual trigger for testing (remove in production)
- const handleTestComplete = () => {
- handleBookingComplete();
- };
-
  if (!isOpen) return null;
 
  return (
  <>
- <div className="fixed inset-0 bg-black bg-opacity-50 z-50 p-4 overflow-y-auto">
- <div className="mx-auto max-w-4xl">
- <div className="bg-white rounded-2xl shadow-2xl w-full h-[90vh] flex flex-col min-h-0">
- {/* Header */}
- <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6 rounded-t-2xl">
+ {/* Modal backdrop with proper scrolling */}
+ <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+ <div className="w-full max-w-5xl max-h-[95vh] flex flex-col">
+ <div className="bg-white rounded-2xl shadow-2xl w-full flex flex-col overflow-hidden">
+ {/* Header - Fixed height */}
+ <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6 flex-shrink-0">
  <div className="flex justify-between items-center">
  <div>
  <h2 className="text-2xl font-bold">Book Your Demo</h2>
  <p className="text-blue-100 mt-1">Schedule a time that works for you</p>
  </div>
- <div className="flex items-center gap-2">
- {/* Test button - remove in production */}
- <button
- onClick={handleTestComplete}
- className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm transition-colors"
- title="Test completion (remove in production)"
- >
- Test Complete
- </button>
-
  <button
  onClick={handleManualClose}
  className="text-white hover:text-gray-200 transition-colors p-2"
@@ -165,50 +222,54 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
  </button>
  </div>
  </div>
- </div>
 
- {/* Scrollable body */}
- <div className="flex-1 overflow-y-auto min-h-0 [-webkit-overflow-scrolling:touch]">
- <div className="p-6 h-full">
- <div className="h-full rounded-xl overflow-hidden">
+ {/* Calendar container - Flexible height */}
+ <div className="flex-1 min-h-0 p-6">
+ <div className="h-full rounded-xl overflow-hidden border border-gray-200">
  <div key={contentKey} className="w-full h-full">
  <iframe
+ ref={iframeRef}
  src="https://api.leadconnectorhq.com/widget/booking/LYZPc4q07HBvvWceHYuK"
  className="w-full h-full block"
- style={{ border: "none", minHeight: "800px" }}
+ style={{
+ border: "none",
+ minHeight: "700px",
+ height: "100%"
+ }}
  title="Booking Calendar"
  id="LYZPc4q07HBvvWceHYuK_1757132084887"
+ scrolling="yes"
+ allow="fullscreen"
  />
  </div>
  </div>
  </div>
- </div>
 
- {/* Status indicator */}
- <div className="px-6 py-3 bg-gray-50 rounded-b-2xl border-t border-gray-200">
+ {/* Footer status - Fixed height */}
+ <div className="px-6 py-4 bg-gray-50 border-t border-gray-200 flex-shrink-0">
  <div className="flex items-center justify-center gap-2 text-sm text-gray-600">
  <Clock className="h-4 w-4" />
- <span>Complete your form and book your appointment</span>
+ <span>Complete your form and select your appointment time</span>
  </div>
  </div>
  </div>
  </div>
  </div>
 
- {/* Completion Overlay */}
+ {/* Booking Confirmation Overlay */}
  {showConfirmation && (
  <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[60] p-4">
- <div className="bg-white rounded-2xl p-8 max-w-md w-full text-center shadow-2xl">
- <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
- <CheckCircle className="h-8 w-8 text-green-600" />
+ <div className="bg-white rounded-2xl p-8 max-w-md w-full text-center shadow-2xl animate-in fade-in duration-300">
+ <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+ <CheckCircle className="h-10 w-10 text-green-600" />
  </div>
 
  <h3 className="text-2xl font-bold text-gray-900 mb-3">
- Booking Confirmed!
+ Appointment Confirmed!
  </h3>
 
- <p className="text-gray-600 mb-6">
- Your appointment has been successfully scheduled. This window will close automatically.
+ <p className="text-gray-600 mb-6 leading-relaxed">
+ Your appointment has been successfully scheduled. You should receive a confirmation email shortly. This window will close automatically.
  </p>
 
  <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 mb-6 border border-blue-200">
@@ -243,4 +304,3 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
 };
 
 export default BookingForm;
-

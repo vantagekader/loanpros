@@ -12,21 +12,12 @@ const BOOKING_SRC =
 const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
   const [iframeKey, setIframeKey] = useState(0);
 
-  // Reload calendar every time modal opens
+  // Reset calendar whenever modal opens
   useEffect(() => {
     if (isOpen) {
       setIframeKey((k) => k + 1);
     }
   }, [isOpen]);
-
-  const handleIframeLoad = () => {
-    // Wait 10s after *any* load, then reset
-    const timer = setTimeout(() => {
-      setIframeKey((k) => k + 1);
-    }, 10000);
-
-    return () => clearTimeout(timer);
-  };
 
   if (!isOpen) return null;
 
@@ -53,17 +44,16 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
             </div>
           </div>
 
-          {/* Body */}
+          {/* Calendar */}
           <div className="flex-1 overflow-y-auto min-h-0">
             <div className="p-6 h-full">
               <div className="h-full rounded-xl overflow-hidden">
                 <iframe
-                  key={iframeKey}
+                  key={iframeKey} // ensures fresh load each open
                   src={BOOKING_SRC}
                   className="w-full h-full block"
                   style={{ border: "none" }}
                   title="Booking Calendar"
-                  onLoad={handleIframeLoad}
                 />
               </div>
             </div>

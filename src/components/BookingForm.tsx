@@ -29,7 +29,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
         </div>
 
         {/* GHL Calendar Embed */}
-        <div className="p-6">
+        <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
           <div className="w-full h-[600px]">
             <iframe 
               src="https://api.leadconnectorhq.com/widget/group/EhdTujOiZjh5g2GDWEPf"

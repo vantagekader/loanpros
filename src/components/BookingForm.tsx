@@ -7,7 +7,7 @@ interface BookingFormProps {
 }
 
 const BOOKING_SRC =
-  "https://api.leadconnectorhq.com/widget/booking/LYZPc4q07HBvvWceHYuK?redirect=false";
+  "https://api.leadconnectorhq.com/widget/booking/LYZPc4q07HBvvWceHYuK";
 
 const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
   const [iframeKey, setIframeKey] = useState(0);

@@ -46,3 +46,32 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
               <button
                 onClick={onClose}
                 className="text-white hover:text-gray-200 transition-colors p-2"
+                aria-label="Close booking form"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+          </div>
+
+          {/* Body */}
+          <div className="flex-1 overflow-y-auto min-h-0">
+            <div className="p-6 h-full">
+              <div className="h-full rounded-xl overflow-hidden">
+                <iframe
+                  key={iframeKey}
+                  src={BOOKING_SRC}
+                  className="w-full h-full block"
+                  style={{ border: "none" }}
+                  title="Booking Calendar"
+                  onLoad={handleIframeLoad}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default BookingForm;

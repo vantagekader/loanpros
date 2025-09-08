@@ -1,7 +1,4 @@
-/    /start.html     200    Host=start.loanpros.io
-/    /book.html      200    Host=book.loanpros.io
-/    /thanks.html    200    Host=thanks.loanpros.io
-/    /start.html     200    Host=www.start.loanpros.io
-/    /book.html      200    Host=www.book.loanpros.io
-/    /thanks.html    200    Host=www.thanks.loanpros.io
-/*   /index.html     200
+/  /start.html  200  Host=start.loanpros.io
+/  /book.html   200  Host=book.loanpros.io
+/  /thanks.html 200  Host=thanks.loanpros.io
+/* /index.html  200

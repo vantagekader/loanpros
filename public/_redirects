@@ -2,7 +2,7 @@
 # https://docs.netlify.com/routing/redirects/
 
 # Main routes
-/               /index.html     200
+/               /start.html     200
 /book           /book.html      200
 /thanks         /thanks.html    200
 
@@ -12,4 +12,4 @@
 /demo           /book           301
 
 # Fallback for SPA-style routing (if needed)
-/*              /index.html     404
+/*              /start.html     404

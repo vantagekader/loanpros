@@ -1,7 +1,7 @@
 # Netlify redirects file
 # https://docs.netlify.com/routing/redirects/
 # Start subdomain
-/*              /index.html     200!   Host=start.loanpros.io
+/*              /start.html     200!   Host=start.loanpros.io
 # Book subdomain  
 /*              /book.html      200!   Host=book.loanpros.io
 # Thanks subdomain

@@ -1,15 +1,12 @@
 # Netlify redirects file
 # https://docs.netlify.com/routing/redirects/
-
-# Main routes
-/               /start.html     200
-/book           /book.html      200
-/thanks         /thanks.html    200
-
-# Legacy redirects (if needed)
-/booking        /book           301
-/thank-you      /thanks         301
-/demo           /book           301
-
-# Fallback for SPA-style routing (if needed)
-/*              /start.html     404
+# Start subdomain
+/*              /index.html     200!   Host=start.loanpros.io
+# Book subdomain  
+/*              /book.html      200!   Host=book.loanpros.io
+# Thanks subdomain
+/*              /thanks.html    200!   Host=thanks.loanpros.io
+# Legacy redirects (optional)
+/booking        /book.html      301
+/thank-you      /thanks.html    301
+/demo           /book.html      301

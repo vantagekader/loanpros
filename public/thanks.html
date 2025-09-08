@@ -3,12 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1049445460404635');
+    fbq('track', 'PageView');
+    fbq('track', 'Schedule'); // Backup Schedule event
+    </script>
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CSZHZCXLX2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-CSZHZCXLX2');
+    </script>
+    
     <title>Thank You - LoanPros</title>
     <meta name="description" content="Thank you for booking your demo with LoanPros. We'll be in touch soon!">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/svg+xml" href="/vite.svg">
 </head>
 <body class="bg-gray-50">
+    <!-- Meta Pixel noscript -->
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1049445460404635&ev=PageView&noscript=1" /></noscript>
+
     <!-- Header -->
     <header class="bg-white shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -139,20 +167,28 @@
         </div>
     </footer>
 
-    <!-- Analytics/Tracking Scripts -->
+    <!-- ENHANCED TRACKING SCRIPT -->
     <script>
         // Track successful booking completion
-        // Add your analytics tracking code here
         console.log('Booking completed successfully');
         
-        // Example: Google Analytics event tracking
-        // gtag('event', 'booking_completed', {
-        //     'event_category': 'engagement',
-        //     'event_label': 'demo_booking'
-        // });
+        // Additional Meta Pixel tracking (backup)
+        if (typeof fbq !== 'undefined') {
+            fbq('track', 'Schedule');
+            fbq('track', 'CompleteRegistration');
+        }
         
-        // Example: Facebook Pixel tracking
-        // fbq('track', 'Schedule');
+        // Google Analytics event tracking
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'booking_completed', {
+                'event_category': 'engagement',
+                'event_label': 'demo_booking'
+            });
+            gtag('event', 'schedule', {
+                'event_category': 'engagement',
+                'event_label': 'demo_booking'
+            });
+        }
     </script>
 </body>
 </html>

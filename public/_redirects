@@ -1,5 +1,5 @@
 # Netlify redirects file
-# https://docs.netlify.com/routing/redirects/
+# Main domain serves the React app (default behavior)
 # Start subdomain
 /*              /start.html     200!   Host=start.loanpros.io
 # Book subdomain  

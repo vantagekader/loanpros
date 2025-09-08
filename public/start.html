@@ -1,8 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- TRACKING CODE -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1049445460404635');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1049445460404635&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CSZHZCXLX2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-CSZHZCXLX2');
+    </script>
+
+    <!-- UTM Capture Script -->
+    <script>
+    function captureUTMs() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const utmParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid'];
+      
+      utmParams.forEach(param => {
+        const value = urlParams.get(param);
+        if (value) {
+          localStorage.setItem(param, value);
+        }
+      });
+    }
+
+    function appendStoredUTMs(url) {
+      const utmParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid'];
+      const urlObj = new URL(url, window.location.origin);
+      
+      utmParams.forEach(param => {
+        const value = localStorage.getItem(param);
+        if (value) {
+          urlObj.searchParams.set(param, value);
+        }
+      });
+      
+      return urlObj.toString();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const bookLinks = document.querySelectorAll('a[href*="/book"], a[href*="book.loanpros.io"]');
+      bookLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const enhancedUrl = appendStoredUTMs(this.href);
+          window.location.href = enhancedUrl;
+        });
+      });
+    });
+
+    captureUTMs();
+    </script>
+    
     <title>LoanPros - AI-Powered Mortgage Lead Generation</title>
     <meta name="description" content="Get exclusive, pre-qualified borrower appointments booked directly onto your calendar. AI-powered lead generation for mortgage professionals.">
     <script src="https://cdn.tailwindcss.com"></script>

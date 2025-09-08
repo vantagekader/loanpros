@@ -1,12 +1,9 @@
 # Netlify redirects file
 # https://docs.netlify.com/routing/redirects/
-# Subdomains serve static files
-/*              /start.html     200!   Host=start.loanpros.io
-/*              /book.html      200!   Host=book.loanpros.io
-/*              /thanks.html    200!   Host=thanks.loanpros.io
-# Legacy redirects
-/booking        /book.html      301
-/thank-you      /thanks.html    301
-/demo           /book.html      301
-# Fallback for main domain - let React app handle routing
-/*              /index.html     200
+/*    /start.html     200!    Host=start.loanpros.io
+/*    /book.html      200!    Host=book.loanpros.io
+/*    /thanks.html    200!    Host=thanks.loanpros.io
+/booking    /book.html      301
+/thank-you    /thanks.html    301
+/demo    /book.html      301
+/*    /index.html     200

@@ -10,7 +10,7 @@ function MainRouter() {
     
     // Handle subdomain redirects
     if (hostname === 'book.loanpros.io') {
-      window.location.href = `/book.html${search}`;
+      window.location.href = `/book${search}`;
       return;
     } else if (hostname === 'start.loanpros.io') {
       window.location.href = `/start.html${search}`;

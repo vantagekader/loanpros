@@ -1,18 +1,18 @@
 [[redirects]]
   from = "https://book.loanpros.io/*"
-  to = "/book.html"
+  to = "/book"
   status = 200
   force = true
 
 [[redirects]]
   from = "https://start.loanpros.io/*"
-  to = "/start.html"
+  to = "/start"
   status = 200
   force = true
 
 [[redirects]]
   from = "https://thanks.loanpros.io/*"
-  to = "/thanks.html"
+  to = "/thanks"
   status = 200
   force = true
 

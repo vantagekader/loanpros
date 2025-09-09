@@ -13,10 +13,10 @@ function MainRouter() {
       window.location.href = `/book${search}`;
       return;
     } else if (hostname === 'start.loanpros.io') {
-      window.location.href = `/start.html${search}`;
+      window.location.href = `/start${search}`;
       return;
     } else if (hostname === 'thanks.loanpros.io') {
-      window.location.href = `/thanks.html${search}`;
+      window.location.href = `/thanks${search}`;
       return;
     }
   }, []);

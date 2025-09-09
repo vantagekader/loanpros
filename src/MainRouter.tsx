@@ -3,18 +3,21 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { routes } from "./routes";
 
 function MainRouter() {
-  // Detect subdomain and redirect accordingly
+  // Detect subdomain and redirect to appropriate HTML file
   React.useEffect(() => {
     const hostname = window.location.hostname;
-    const pathname = window.location.pathname;
+    const search = window.location.search;
     
     // Handle subdomain redirects
     if (hostname === 'book.loanpros.io') {
-      window.history.replaceState(null, '', `/book${pathname}`);
+      window.location.href = `/book.html${search}`;
+      return;
     } else if (hostname === 'start.loanpros.io') {
-      window.history.replaceState(null, '', `/start${pathname}`);
+      window.location.href = `/start.html${search}`;
+      return;
     } else if (hostname === 'thanks.loanpros.io') {
-      window.history.replaceState(null, '', `/thanks${pathname}`);
+      window.location.href = `/thanks.html${search}`;
+      return;
     }
   }, []);
 
@@ -24,8 +27,6 @@ function MainRouter() {
         {routes.map((route, index) => (
           <Route key={route.path || index} {...route} />
         ))}
-        {/* Fallback redirect to home for unhandled paths */}
-        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
+import BookingForm from './BookingForm';
 
 const faqs = [
   {
@@ -63,11 +64,19 @@ const faqs = [
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [isBookingFormOpen, setIsBookingFormOpen] = useState(false);
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  const handleOpenBookingForm = () => {
+    setIsBookingFormOpen(true);
+  };
+
+  const handleCloseBookingForm = () => {
+    setIsBookingFormOpen(false);
+  };
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -153,12 +162,12 @@ const FAQ = () => {
               Our team is here to help. Book a demo to get personalized answers about how LoanPros can transform your mortgage business.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a 
-                href="https://book.loanpros.io" 
+              <button 
+                onClick={handleOpenBookingForm}
                 className="bg-blue-600 text-white px-8 py-4 rounded-lg hover:bg-blue-700 transition-all duration-300 font-semibold flex items-center gap-2 shadow-lg hover:shadow-xl"
               >
                 Book Your Demo
-              </a>
+              </button>
               <div className="flex items-center gap-6 text-gray-600">
                 <div className="flex items-center gap-2">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -193,6 +202,8 @@ const FAQ = () => {
           </div>
         </div>
       </footer>
+      
+      <BookingForm isOpen={isBookingFormOpen} onClose={handleCloseBookingForm} />
     </div>
   );
 };

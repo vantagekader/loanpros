@@ -205,7 +205,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ isOpen, onClose }) => {
  }
  } catch (error) {
  // CORS restriction
- lastUrlRef.current = iframe?.src || "";
+ lastUrlRef.current = iframeRef.current?.src || "";
  }
  };
 

@@ -189,14 +189,14 @@ const PrivacyPolicy = () => {
                     <Mail className="w-5 h-5 text-blue-600" />
                     <div>
                       <div className="font-semibold text-gray-900">Email</div>
-                      <div className="text-gray-700">privacy@loanpros.com</div>
+                      <div className="text-gray-700">hello@loanpros.io</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <Phone className="w-5 h-5 text-blue-600" />
                     <div>
                       <div className="font-semibold text-gray-900">Phone</div>
-                      <div className="text-gray-700">(555) 123-4567</div>
+                      <div className="text-gray-700">(850) 750-9281</div>
                     </div>
                   </div>
                 </div>

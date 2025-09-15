@@ -17,7 +17,7 @@ const Hero: React.FC<HeroProps> = ({ onBookDemo }) => {
                 Stop settling for cold leads. <span className="text-blue-600">Appointments matter more than ever right now.</span>
               </h1>
               <p className="text-xl text-gray-600 leading-relaxed">
-                Get <span className="text-blue-600">exclusive</span>, pre-qualified borrower appointments booked directly onto your calendar. 
+                Get <span className="text-blue-600">exclusive</span>, interested borrower appointments booked directly onto your calendar. 
                 Our AI-powered system delivers mortgage-ready prospects who want to talk financing.
               </p>
             </div>

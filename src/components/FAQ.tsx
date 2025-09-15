@@ -177,8 +177,6 @@ const FAQ = () => {
           </div>
         </div>
       </main>
-  );
-};
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
@@ -196,4 +194,7 @@ const FAQ = () => {
         </div>
       </footer>
     </div>
+  );
+};
+
 export default FAQ;

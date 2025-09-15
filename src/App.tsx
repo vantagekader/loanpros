@@ -4,7 +4,6 @@ import Hero from './components/Hero';
 import Features from './components/Features';
 import HowItWorks from './components/HowItWorks';
 import Benefits from './components/Benefits';
-import FAQ from './components/FAQ';
 import CTA from './components/CTA';
 import Footer from './components/Footer';
 import BookingForm from './components/BookingForm';
@@ -27,7 +26,6 @@ function App() {
       <Features />
       <HowItWorks />
       <Benefits onBookDemo={handleOpenBookingForm} />
-      <FAQ />
       <CTA onBookDemo={handleOpenBookingForm} />
       <Footer />
       <BookingForm isOpen={isBookingFormOpen} onClose={handleCloseBookingForm} />

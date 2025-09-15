@@ -31,9 +31,6 @@ const Header: React.FC<HeaderProps> = ({ onGetStarted }) => {
             <a href="#how-it-works" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
               How It Works
             </a>
-            <a href="#faq" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
-              FAQ
-            </a>
             <a href="#benefits" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
               Benefits
             </a>
@@ -61,9 +58,6 @@ const Header: React.FC<HeaderProps> = ({ onGetStarted }) => {
             <nav className="flex flex-col space-y-4">
               <a href="#features" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
                 Features
-              </a>
-              <a href="#how-it-works" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
-                How It Works
               </a>
               <a href="#benefits" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
                 Benefits

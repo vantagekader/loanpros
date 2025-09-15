@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ArrowLeft } from 'lucide-react';
 import { ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
 
 const faqs = [
@@ -68,8 +69,33 @@ const FAQ = () => {
   };
 
   return (
-    <section id="faq" className="py-20 bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <div className="flex items-center">
+              <a href="/" className="flex items-center">
+                <img 
+                  src="/LoanprosWhitebackgroundbluetextSNIPPED.png" 
+                  alt="LoanPros" 
+                  className="h-16 w-auto"
+                />
+              </a>
+            </div>
+            <a 
+              href="/" 
+              className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back to Home
+            </a>
+          </div>
+        </div>
+      </header>
+
+      {/* FAQ Content */}
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-16">
           <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <HelpCircle className="w-8 h-8 text-blue-600" />
@@ -150,9 +176,24 @@ const FAQ = () => {
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </main>
   );
 };
 
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <img 
+              src="/loanpros main logo blue background SNIPPED.png" 
+              alt="LoanPros" 
+              className="h-12 w-auto mx-auto mb-4"
+            />
+            <p className="text-gray-400">
+              © 2025 LoanPros. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
 export default FAQ;

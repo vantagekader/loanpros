@@ -4,7 +4,7 @@ import { ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
 const faqs = [
   {
     question: "How are your leads different from other lead generation companies?",
-    answer: "Our leads are 100% exclusive to you - no sharing with other loan officers. We use AI-powered qualification to ensure every appointment is with a pre-qualified borrower who meets your specific criteria. Plus, they book directly onto your calendar, eliminating phone tag and missed opportunities."
+    answer: "Our leads are exclusive to you - no sharing with other loan officers. We use AI-powered qualification to ensure appointments are with pre-qualified borrowers who meet your specific criteria. Plus, they book directly onto your calendar, eliminating phone tag and missed opportunities."
   },
   {
     question: "What types of borrowers do you generate leads for?",
@@ -12,15 +12,15 @@ const faqs = [
   },
   {
     question: "How quickly can I start receiving appointments?",
-    answer: "Most loan officers start receiving qualified appointments within 7-14 days of campaign launch. We need time to set up your targeted campaigns, create your booking system, and begin the lead nurturing process. The exact timeline depends on your market and target criteria."
+    answer: "Loan officers typically start receiving qualified appointments within a few weeks of campaign launch. We need time to set up your targeted campaigns, create your booking system, and begin the lead nurturing process. The exact timeline depends on your market and target criteria."
   },
   {
     question: "What's the typical show rate for appointments?",
-    answer: "Our average show rate is 70-75%, which is significantly higher than industry standards. This is because our AI qualification process ensures only genuinely interested, pre-qualified borrowers book appointments. We also send automated reminders and confirmations to maximize attendance."
+    answer: "Our show rates are significantly higher than industry standards. This is because our AI qualification process ensures only genuinely interested, pre-qualified borrowers book appointments. We also send automated reminders and confirmations to maximize attendance."
   },
   {
     question: "How much does the service cost?",
-    answer: "Our pricing is customized based on your market, loan volume goals, and specific requirements. We offer flexible packages starting at $2,500/month. Most clients see a 300%+ ROI within the first 90 days. We'll provide a detailed cost analysis during your demo call."
+    answer: "Our pricing is customized based on your market, loan volume goals, and specific requirements. We offer flexible packages to fit different business sizes and budgets. Most clients see a strong return on investment. We'll provide a detailed cost analysis during your demo call."
   },
   {
     question: "Do you work with loan officers in all states?",
@@ -40,19 +40,19 @@ const faqs = [
   },
   {
     question: "What happens if a lead doesn't show up for their appointment?",
-    answer: "We automatically follow up with no-shows to attempt rescheduling. If they don't reschedule within 48 hours, we provide a replacement appointment at no additional cost. Our goal is to ensure you get the number of qualified conversations you're paying for."
+    answer: "We automatically follow up with no-shows to attempt rescheduling. We work with you to address any attendance issues and optimize your campaign performance. Our goal is to ensure you get quality conversations with interested borrowers."
   },
   {
     question: "How do you track and report on campaign performance?",
-    answer: "You'll receive detailed weekly reports showing: number of leads generated, appointment booking rates, show rates, lead sources, cost per appointment, and ROI analysis. We also provide real-time access to your campaign dashboard for transparency."
+    answer: "You'll receive detailed reports showing: number of leads generated, appointment booking rates, show rates, lead sources, and performance metrics. We also provide access to your campaign dashboard for transparency and real-time insights."
   },
   {
     question: "Is there a contract or minimum commitment?",
-    answer: "We offer both month-to-month and longer-term contracts. Most clients choose a 3-6 month initial commitment to allow time for campaign optimization and maximum results. We're confident in our service and offer performance guarantees for committed clients."
+    answer: "We offer flexible contract options including both month-to-month and longer-term agreements. Many clients choose longer commitments to allow time for campaign optimization and better results. We'll discuss the best option for your business during our consultation."
   },
   {
     question: "What if I'm not satisfied with the lead quality?",
-    answer: "We offer a 30-day satisfaction guarantee. If you're not happy with the lead quality in your first month, we'll work with you to optimize the campaigns or provide a full refund. Our success depends on your success, so we're committed to delivering results."
+    answer: "We're committed to your success and will work closely with you to optimize campaign performance. If you're not satisfied with lead quality, we'll make adjustments to improve results. Our success depends on your success, so we're dedicated to delivering value."
   },
   {
     question: "Do you provide any training or support?",

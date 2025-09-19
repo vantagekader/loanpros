@@ -245,6 +245,13 @@
                 console.log('Session timeout - consider redirecting or showing message');
             }
         }, 30 * 60 * 1000);
+
+        // Track Lead event when user engages with booking form
+        setTimeout(() => {
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead');
+            }
+        }, 5000); // Track as lead after 5 seconds of engagement
     </script>
 </body>
 </html>

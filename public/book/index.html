@@ -14,10 +14,9 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '640101925562475');
+    fbq('init', '1049445460404635');
     fbq('track', 'PageView');
     </script>
-    <!-- End Meta Pixel Code -->
 
     <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CSZHZCXLX2"></script>
@@ -65,15 +64,9 @@
     <script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
     <link rel="icon" type="image/png" href="/loanproscalendarFavicon.png">
 </head>
-<body>
-    <noscript>
-        <img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=640101925562475&ev=PageView&noscript=1" />
-    </noscript>
-
-    <script>
-        fbq('track', 'Lead');
-    </script>
+<body class="bg-gray-50">
+    <!-- Meta Pixel noscript -->
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1049445460404635&ev=PageView&noscript=1" /></noscript>
 
     <!-- Header -->
     <header class="bg-white shadow-sm">
@@ -182,6 +175,40 @@
         // Enhanced booking completion detection with tracking
         let bookingCompleted = false;
         
+        // Listen for iframe navigation changes
+        const iframe = document.getElementById('LYZPc4q07HBvvWceHYuK');
+        if (iframe) {
+            iframe.addEventListener('load', function() {
+                if (iframe.contentWindow && bookingCompleted === false) {
+                    setTimeout(() => {
+                        try {
+                            const currentUrl = iframe.contentWindow.location.href;
+                            if (currentUrl.includes('success') || currentUrl.includes('complete') || currentUrl.includes('thank')) {
+                                bookingCompleted = true;
+                                
+                                // Fire tracking events
+                                if (typeof fbq !== 'undefined') {
+                                    fbq('track', 'Schedule');
+                                }
+                                if (typeof gtag !== 'undefined') {
+                                    gtag('event', 'schedule', {
+                                        'event_category': 'engagement',
+                                        'event_label': 'demo_booking'
+                                    });
+                                }
+                                
+                                // Redirect to thanks page with UTMs
+                                const thanksUrl = appendStoredUTMs('https://thanks.loanpros.io/');
+                                window.location.href = thanksUrl;
+                            }
+                        } catch (e) {
+                            console.log('Booking widget loaded');
+                        }
+                    }, 2000);
+                }
+            });
+        }
+
         // Listen for postMessage events from the booking widget
         window.addEventListener('message', function(event) {
             if (event.data && typeof event.data === 'object') {
@@ -211,14 +238,6 @@
                 }
             }
         });
-
-        // Listen for iframe URL changes (safer approach)
-        const iframe = document.getElementById('LYZPc4q07HBvvWceHYuK');
-        if (iframe) {
-            iframe.addEventListener('load', function() {
-                console.log('Booking widget loaded successfully');
-            });
-        }
 
         // Fallback timeout
         setTimeout(() => {

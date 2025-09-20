@@ -176,6 +176,40 @@
         // Enhanced booking completion detection with tracking
         let bookingCompleted = false;
         
+        // Listen for iframe navigation changes
+        const iframe = document.getElementById('LYZPc4q07HBvvWceHYuK');
+        if (iframe) {
+            iframe.addEventListener('load', function() {
+                if (iframe.contentWindow && bookingCompleted === false) {
+                    setTimeout(() => {
+                        try {
+                            const currentUrl = iframe.contentWindow.location.href;
+                            if (currentUrl.includes('success') || currentUrl.includes('complete') || currentUrl.includes('thank')) {
+                                bookingCompleted = true;
+                                
+                                // Fire tracking events
+                                if (typeof fbq !== 'undefined') {
+                                    fbq('track', 'Schedule');
+                                }
+                                if (typeof gtag !== 'undefined') {
+                                    gtag('event', 'schedule', {
+                                        'event_category': 'engagement',
+                                        'event_label': 'demo_booking'
+                                    });
+                                }
+                                
+                                // Redirect to thanks page with UTMs
+                                const thanksUrl = appendStoredUTMs('https://thanks.loanpros.io/');
+                                window.location.href = thanksUrl;
+                            }
+                        } catch (e) {
+                            console.log('Booking widget loaded');
+                        }
+                    }, 2000);
+                }
+            });
+        }
+
         // Listen for postMessage events from the booking widget
         window.addEventListener('message', function(event) {
             if (event.data && typeof event.data === 'object') {
@@ -205,14 +239,6 @@
                 }
             }
         });
-
-        // Listen for iframe URL changes (safer approach)
-        const iframe = document.getElementById('LYZPc4q07HBvvWceHYuK');
-        if (iframe) {
-            iframe.addEventListener('load', function() {
-                console.log('Booking widget loaded successfully');
-            });
-        }
 
         // Fallback timeout
         setTimeout(() => {

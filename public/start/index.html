@@ -69,6 +69,15 @@
     });
 
     captureUTMs();
+
+    // Handle subdomain redirect to book page
+    document.addEventListener('DOMContentLoaded', function() {
+      const hostname = window.location.hostname;
+      if (hostname === 'start.loanpros.io') {
+        const search = window.location.search;
+        window.location.href = `https://book.loanpros.io${search}`;
+      }
+    });
     </script>
     
     <title>LoanPros - AI-Powered Mortgage Lead Generation</title>

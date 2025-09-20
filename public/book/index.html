@@ -66,11 +66,14 @@
     <link rel="icon" type="image/png" href="/loanproscalendarFavicon.png">
 </head>
 <body>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=640101925562475&ev=PageView&noscript=1"
-/></noscript>
-<script>
-  fbq('track', 'Lead');
+    <noscript>
+        <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=640101925562475&ev=PageView&noscript=1" />
+    </noscript>
+
+    <script>
+        fbq('track', 'Lead');
+    </script>
 
     <!-- Header -->
     <header class="bg-white shadow-sm">
@@ -179,40 +182,6 @@ src="https://www.facebook.com/tr?id=640101925562475&ev=PageView&noscript=1"
         // Enhanced booking completion detection with tracking
         let bookingCompleted = false;
         
-        // Listen for iframe navigation changes
-        const iframe = document.getElementById('LYZPc4q07HBvvWceHYuK');
-        if (iframe) {
-            iframe.addEventListener('load', function() {
-                if (iframe.contentWindow && bookingCompleted === false) {
-                    setTimeout(() => {
-                        try {
-                            const currentUrl = iframe.contentWindow.location.href;
-                            if (currentUrl.includes('success') || currentUrl.includes('complete') || currentUrl.includes('thank')) {
-                                bookingCompleted = true;
-                                
-                                // Fire tracking events
-                                if (typeof fbq !== 'undefined') {
-                                    fbq('track', 'Schedule');
-                                }
-                                if (typeof gtag !== 'undefined') {
-                                    gtag('event', 'schedule', {
-                                        'event_category': 'engagement',
-                                        'event_label': 'demo_booking'
-                                    });
-                                }
-                                
-                                // Redirect to thanks page with UTMs
-                                const thanksUrl = appendStoredUTMs('https://thanks.loanpros.io/');
-                                window.location.href = thanksUrl;
-                            }
-                        } catch (e) {
-                            console.log('Booking widget loaded');
-                        }
-                    }, 2000);
-                }
-            });
-        }
-
         // Listen for postMessage events from the booking widget
         window.addEventListener('message', function(event) {
             if (event.data && typeof event.data === 'object') {
@@ -243,19 +212,20 @@ src="https://www.facebook.com/tr?id=640101925562475&ev=PageView&noscript=1"
             }
         });
 
+        // Listen for iframe URL changes (safer approach)
+        const iframe = document.getElementById('LYZPc4q07HBvvWceHYuK');
+        if (iframe) {
+            iframe.addEventListener('load', function() {
+                console.log('Booking widget loaded successfully');
+            });
+        }
+
         // Fallback timeout
         setTimeout(() => {
             if (!bookingCompleted) {
                 console.log('Session timeout - consider redirecting or showing message');
             }
         }, 30 * 60 * 1000);
-
-        // Track Lead event when user engages with booking form
-        setTimeout(() => {
-            if (typeof fbq !== 'undefined') {
-                fbq('track', 'Lead');
-            }
-        }, 5000); // Track as lead after 5 seconds of engagement
     </script>
 </body>
 </html>

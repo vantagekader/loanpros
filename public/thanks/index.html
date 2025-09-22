@@ -172,9 +172,8 @@ src="https://www.facebook.com/tr?id=640101925562475&ev=PageView&noscript=1"
         // Track successful booking completion
         console.log('Booking completed successfully');
         
-        // Additional Meta Pixel tracking (backup)
+        // Meta Pixel tracking
         if (typeof fbq !== 'undefined') {
-            fbq('track', 'Schedule');
             fbq('track', 'CompleteRegistration');
         }
         

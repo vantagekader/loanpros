@@ -187,11 +187,6 @@ src="https://www.facebook.com/tr?id=640101925562475&ev=PageView&noscript=1"
                             if (currentUrl.includes('success') || currentUrl.includes('complete') || currentUrl.includes('thank')) {
                                 bookingCompleted = true;
                                 
-                                // Fire tracking events
-                                if (typeof fbq !== 'undefined') {
-                                    fbq('track', 'Schedule');
-                                }
-                                
                                 // Redirect to thanks page with UTMs
                                 const thanksUrl = appendStoredUTMs('https://thanks.loanpros.io/');
                                 window.location.href = thanksUrl;
@@ -213,11 +208,6 @@ src="https://www.facebook.com/tr?id=640101925562475&ev=PageView&noscript=1"
                     event.data.type === 'calendar_booked') {
                     
                     bookingCompleted = true;
-                    
-                    // Fire tracking events
-                    if (typeof fbq !== 'undefined') {
-                        fbq('track', 'Schedule');
-                    }
                     
                     // Redirect to thanks page with UTMs
                     setTimeout(() => {

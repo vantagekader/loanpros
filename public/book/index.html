@@ -16,7 +16,6 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '640101925562475');
 fbq('track', 'PageView');
-fbq('track', 'Lead');
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=640101925562475&ev=PageView&noscript=1"
@@ -211,6 +210,16 @@ src="https://www.facebook.com/tr?id=640101925562475&ev=PageView&noscript=1"
                     bookingCompleted = true;
                     
                     // Redirect to thanks page with UTMs
+                    // Track Lead conversion
+                    if (typeof fbq !== 'undefined') {
+                        fbq('track', 'Lead');
+                    }
+                    
+                    // Track Lead conversion
+                    if (typeof fbq !== 'undefined') {
+                        fbq('track', 'Lead');
+                    }
+                    
                     setTimeout(() => {
                         const thanksUrl = appendStoredUTMs('https://thanks.loanpros.io/');
                         window.location.href = thanksUrl;

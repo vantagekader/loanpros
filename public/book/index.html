@@ -191,12 +191,6 @@ src="https://www.facebook.com/tr?id=640101925562475&ev=PageView&noscript=1"
                                 if (typeof fbq !== 'undefined') {
                                     fbq('track', 'Schedule');
                                 }
-                                if (typeof gtag !== 'undefined') {
-                                    gtag('event', 'schedule', {
-                                        'event_category': 'engagement',
-                                        'event_label': 'demo_booking'
-                                    });
-                                }
                                 
                                 // Redirect to thanks page with UTMs
                                 const thanksUrl = appendStoredUTMs('https://thanks.loanpros.io/');
@@ -223,12 +217,6 @@ src="https://www.facebook.com/tr?id=640101925562475&ev=PageView&noscript=1"
                     // Fire tracking events
                     if (typeof fbq !== 'undefined') {
                         fbq('track', 'Schedule');
-                    }
-                    if (typeof gtag !== 'undefined') {
-                        gtag('event', 'schedule', {
-                            'event_category': 'engagement',
-                            'event_label': 'demo_booking'
-                        });
                     }
                     
                     // Redirect to thanks page with UTMs

@@ -64,6 +64,9 @@ const Footer = () => {
             <a href="/privacy" className="text-gray-400 hover:text-white transition-colors text-sm">
               Privacy Policy
             </a>
+            <a href="/terms" className="text-gray-400 hover:text-white transition-colors text-sm">
+              Terms & Conditions
+            </a>
             <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
               Cookie Policy
             </a>

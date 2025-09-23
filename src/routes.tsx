@@ -2,6 +2,7 @@ import { RouteObject } from "react-router-dom";
 import App from "./App";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import FAQ from "./components/FAQ";
+import TermsAndConditions from "./components/TermsAndConditions";
 
 // Routes specified in inverse order of path specificity
 export const routes: RouteObject[] = [
@@ -9,6 +10,12 @@ export const routes: RouteObject[] = [
   {
     path: "/faq",
     element: <FAQ />
+  },
+  
+  // Terms and Conditions route
+  {
+    path: "/terms",
+    element: <TermsAndConditions />
   },
   
   // Privacy Policy route

@@ -18,7 +18,7 @@ const Hero: React.FC<HeroProps> = ({ onBookDemo }) => {
               </h1>
               <p className="text-xl text-gray-600 leading-relaxed">
                 Get <span className="text-blue-600">exclusive</span>, interested borrower appointments booked directly onto your calendar. 
-                Our AI-powered system delivers mortgage-ready prospects who want to talk financing.
+                We deliver mortgage-ready prospects who want to talk financing.
               </p>
             </div>
 

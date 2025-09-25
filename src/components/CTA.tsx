@@ -50,7 +50,7 @@ const CTA: React.FC<CTAProps> = ({ onBookDemo }) => {
                 <div className="text-blue-200 text-sm">Loan Officers</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-white mb-1">$537M+</div>
+                <div className="text-3xl font-bold text-white mb-1">$87M+</div>
                 <div className="text-blue-200 text-sm">Loans Closed</div>
               </div>
               <div>
@@ -58,8 +58,8 @@ const CTA: React.FC<CTAProps> = ({ onBookDemo }) => {
                 <div className="text-blue-200 text-sm">Client Retention</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-white mb-1">24hr</div>
-                <div className="text-blue-200 text-sm">Setup Time</div>
+                <div className="text-3xl font-bold text-white mb-1">Zero</div>
+                <div className="text-blue-200 text-sm">Tech Hassle</div>
               </div>
             </div>
           </div>
